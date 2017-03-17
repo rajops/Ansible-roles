@@ -1,0 +1,5 @@
+---
+- name: 'reload-ansible-role-nginx'
+  service:
+    name: 'nginx'
+    state: 'reloaded'

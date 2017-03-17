@@ -1,0 +1,43 @@
+---
+- name: 'Add the nginx apt signing key'
+  apt_key:
+    url: 'http://nginx.org/keys/nginx_signing.key'
+    state: 'present'
+
+- name: 'Add the nginx ubuntu mainline repository'
+  apt_repository:
+    repo: 'deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx'
+    state: 'present'
+    filename: 'nginx'
+    update_cache: 'yes'
+
+- name: "Install the latest mainline version of nginx"
+  apt:
+    name: 'nginx'
+    state: 'latest'
+  notify: 'reload-ansible-role-nginx'
+
+- name: 'Start the nginx service'
+  service:
+    name: 'nginx'
+    state: 'started'
+    enabled: 'yes'
+
+- name: 'Put the nginx.conf file in place'
+  copy:
+    content: "{{ nginx_config_file }}"
+    dest: '/etc/nginx/nginx.conf'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify: 'reload-ansible-role-nginx'
+
+- name: 'Copy the default static html files to /usr/share/nginx/html'
+  become: yes
+  copy:
+    src: "{{ nginx_static_html_directory }}/"
+    dest: '/usr/share/nginx/html'
+    mode: '0644'
+  notify: 'reload-ansible-role-nginx'
+
+- meta: flush_handlers
