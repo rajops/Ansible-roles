@@ -1,0 +1,32 @@
+---
+- hosts: host
+  roles:
+    - { role: "django.env" }
+  vars:
+      username: "admin_python"
+      filepath: "/home/admin_python/admin_python"
+      owner: "admin_python"
+
+- hosts: host
+  roles:
+    - { role: "django.env" }
+  vars:
+      username: "userapi"
+      filepath: "/home/userapi/userapi"
+      owner: "userapi"
+
+- hosts: host
+  roles:
+   - { role: "django.env" }
+  vars:
+      username: "docinstaapi"
+      filepath: "/home/docinstaapi/docinstaapi"
+      owner: "docinstaapi"
+
+- hosts: host
+  roles:
+   - { role: "django.env" }
+  vars:
+      username: "doctor_python"
+      filepath: "/home/doctor_python/doctor_python"
+      owner: "doctor_python"

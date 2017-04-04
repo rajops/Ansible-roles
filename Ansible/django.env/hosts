@@ -1,0 +1,2 @@
+[deploy-host]
+54.169.217.128 ansible_user=ec2-user

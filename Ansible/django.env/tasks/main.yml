@@ -1,0 +1,25 @@
+---
+# tasks file for django.env
+---
+- name: Creating hosts ...
+  user: name={{ username }} shell=/bin/bash
+  become: true
+
+- name: Creating project directory for django project ...
+  file: path={{ filepath }} state=directory mode=0755 owner={{ owner }} group={{ owner }}
+  become: true
+
+- name: Creating  virtualenv ...
+  command: "virtualenv env chdir={{ filepath }}"
+  become: true
+
+- name: Copying requirement library file ...
+  copy: src=requirement.txt dest={{ filepath }}/requirement.txt
+  become: true
+
+- pip: requirements={{ filepath }}/requirement.txt virtualenv={{ filepath }}/env
+  become: true
+
+- pip: name='git+git://github.com/dlrust/python-memcached-stats.git' editable=false virtualenv={{ filepath }}/env
+  become: true
+
