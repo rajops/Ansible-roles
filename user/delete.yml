@@ -1,0 +1,6 @@
+---
+
+- user:
+   name: "Enter user name"
+   state: absent
+   remove: yes

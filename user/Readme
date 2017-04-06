@@ -1,0 +1,20 @@
+#Document to Create/Delete users
+
+#Assumption: 
+	We are assuming that users need to created/deleted on a central server through which other servers will be managed.
+
+#Requirement: 
+	Ansible server 
+
+An ansible role is created to manage the users on the central server and the central server access key is placed on all the user’s authorized file so that users can access through same key
+
+#How to run playbook
+	
+There are 2 files main.yml & delete.yml. 
+In main.yml we need to defines in username under the members.
+In delete.yml we have to define the name which we want to delete.
+
+#After editing these 2 files run the files through ansible -
+
+$ ansible-playbook main.yml
+

@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    members:
+      - user1
+      - user2
+      - user3
+      - user4
+  tasks:
+
+ 
+  - name: Add sudoers users to wheel group
+    user:
+      name: "{{ item }}"
+      append: yes
+      state: present
+      createhome: yes
+    with_items: "{{ members }}"
+
+  - include: delete.yml
+ 
