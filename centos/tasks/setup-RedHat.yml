@@ -19,7 +19,7 @@
 
 - name: Download specific Jenkins version.
   get_url:
-    url: "{{ jenkins_pkg_url }}/jenkins-{{ jenkins_version }}-1.1.noarch.rpm"
+    url: "{{ centos_jenkins_pkg_url }}/jenkins-{{ jenkins_version }}-1.1.noarch.rpm"
     dest: "/tmp/jenkins.rpm"
   when: jenkins_version is defined
 
@@ -37,9 +37,9 @@
 
 - name: Validate Jenkins is installed and register package name.
   package:
-    name: jenkins
+    Name: jenkins
     state: present
-  when: not specific_version.stat.exists
+  when: not specific_version.stat.exists	
   notify: configure default users
 
 - name: Install Jenkins from repository.
@@ -47,3 +47,4 @@
     name: jenkins
     state: installed
   when: jenkins_version is undefined
+

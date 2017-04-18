@@ -1,9 +1,9 @@
 ---
 # Variable setup.
 
-- include: plugins.yml
-- name: Include OS-Specific variables
-  include_vars: "{{ ansible_os_family }}.yml"
+#- include: plugins.yml
+#- name: Include OS-Specific variables
+#  include_vars: "{{ ansible_os_family }}.yml"
 
 - name: Define jenkins_repo_url
   set_fact:
@@ -30,22 +30,6 @@
 # Configure Jenkins init settings.
 - include: settings.yml
 
-#Install Java
-- name: Download Java
-  command: "wget -q -O {{java_archive}} --no-check-certificate --no-cookies --header 'Cookie: oraclelicense=accept-securebackup-cookie' {{download_url}} creates={{java_archive}}"
-
-- name: Unpack archive
-  command: "tar -zxf {{java_archive}} -C {{download_folder}} creates={{java_name}}"
-
-- name: Fix ownership
-  file: state=directory path={{java_name}} owner=root group=root recurse=yes
-
-- name: Make Java available for system
-  command: 'alternatives --install "/usr/bin/java" "java" "{{java_name}}/bin/java" 2000'
-
-- name: Clean up
-  file: state=absent path={{java_archive}}
-
 # Make sure Jenkins starts, then configure Jenkins.
 - name: Ensure Jenkins is started and runs on startup.
   service: name=jenkins state=started enabled=yes
@@ -69,10 +53,15 @@
   delay: 10
   check_mode: no
 
-- name: Remove Jenkins security init scripts after first startup.
-  file:
-    path: "{{ jenkins_home }}/init.groovy.d/created-seed-job.groovy"
-    state: absent
+
+#- name: Remove Jenkins security init scripts after first startup.
+#  file:
+#    path: "{{ jenkins_home }}/init.groovy.d/created-seed-job.groovy"
+#    state: absent
 
 # Update Jenkins and install configured plugins.
-#- include: plugins.yml
+- include: plugins.yml
+
+- template:
+    src: create-seed-job.groovy.j2
+    dest: /var/lib/jenkins/init.groovy.d/create-seed-job.groovy

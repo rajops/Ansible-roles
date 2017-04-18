@@ -37,8 +37,8 @@
     group: jenkins
     mode: 0775
 
-#- name: Trigger handlers immediately in case Jenkins was installed
-#  meta: flush_handlers
+- name: Trigger handlers immediately in case Jenkins was installed
+  meta: flush_handlers
 
 - name: Immediately restart Jenkins on http or user changes.
   service: name=jenkins state=restarted
