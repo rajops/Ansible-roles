@@ -1,0 +1,15 @@
+---
+__jenkins_repo_url: deb http://pkg.jenkins.io/debian binary/
+__jenkins_repo_key_url: http://pkg.jenkins.io/debian/jenkins.io.key
+__jenkins_pkg_url: http://pkg.jenkins.io/debian/binary/
+jenkins_init_file: /etc/default/jenkins
+jenkins_http_port_param: HTTP_PORT
+jenkins_java_options_env_var: JAVA_ARGS
+serverAPIUrl: https://api.github.com
+jenkinsUrl: http://192.168.0.21:8080/ghprbhook/
+credentialsId: tyagianita
+id: identification@
+description: global
+secret: {AQAAABAAAAAQ4aSCHPUG7iL9IKN2wd9XbSRf/HpJOGnYTMQQXSq4MZA=}
+username: '"rachit22"'
+password: '"rachit22"'

@@ -1,0 +1,9 @@
+--- 
+#serverAPIUrl: https://api.github.com 
+#jenkinsUrl: http://192.168.0.21:8080/ghprbhook/
+#credentialsId: rajiv
+#id: 7dccf079-69c3-4b79-b19a-efd3a2790a46 
+#description: sorb 
+#secret: {AQAAABAAAAAQ4aSCHPUG7iL9IKN2wd9XbSRf/HpJOGnYTMQQXSq4MZA=}
+
+
