@@ -1,0 +1,19 @@
+---
+
+- hosts: tomcat
+  vars: 
+  - warRemotePath: /home/vagrant/Spring3HibernateApp.war
+  - destination: /var/lib/tomcat7/webapps/
+  
+  tasks:
+  - name: Stoping tomcat
+    service: name=tomcat7 state=stopped
+
+#  - name: remove war file
+#    shell: rm -rf {{ destination }}/*
+
+  - name: copying war file from jenkin machine  
+    copy: src={{ warRemotePath }} dest={{ destination }}
+
+  - name: restarting service 
+    service: name=tomcat7 state=restarted
